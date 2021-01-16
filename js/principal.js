@@ -14,32 +14,40 @@ titulo.textContent = "Aparecida Nutricionista";
 var tituloPorClasse = document.querySelector(".titulo");
 console.log("Título usando a classe: ", tituloPorClasse.textContent);
 
-// calculando IMC
-var paciente = document.querySelector("#primeiro-paciente");
+var pacientes = document.querySelectorAll(".paciente");
 
-var tdPeso = paciente.querySelector(".info-peso");
-var peso = tdPeso.textContent;
+for(var i = 0; i < pacientes.length; i++) {
+  // calculando IMC
+  var paciente = pacientes[i];
 
-var tdAltura = paciente.querySelector(".info-altura");
-var altura = tdAltura.textContent;
+  var tdPeso = paciente.querySelector(".info-peso");
+  var peso = tdPeso.textContent;
 
-var imc = peso / (altura * altura);
-var tdImc = paciente.querySelector(".info-imc");
+  var tdAltura = paciente.querySelector(".info-altura");
+  var altura = tdAltura.textContent;
 
-// condições lógicas
-var pesoEhValido = true;
-var alturaEhValida = true;
+  var imc = peso / (altura * altura);
+  var tdImc = paciente.querySelector(".info-imc");
 
-if (peso <= 0 || peso >= 1000) {
-    pesoEhValido = false;
-    tdImc.textContent = "Peso inválido!";
-}
+  // condições lógicas
+  var pesoEhValido = true;
+  var alturaEhValida = true;
 
-if (altura <= 0 || altura >= 3.00){
-    alturaEhValida = false;
-    tdImc.textContent = "Altura inválida!";
-}
+  if (peso <= 0 || peso >= 1000) {
+      pesoEhValido = false;
+      tdImc.textContent = "Peso inválido!";
+      // alterando o bkg utilizando o manipulador do javascript
+      paciente.style.backgroundColor = "lightcoral";
+  }
 
-if (alturaEhValida && pesoEhValido){
-    tdImc.textContent = peso / (altura * altura);
+  if (altura <= 0 || altura >= 3.00){
+      alturaEhValida = false;
+      tdImc.textContent = "Altura inválida!";
+      // adiconando uma classe css ao elemento
+      paciente.classList.add("paciente-invalido");
+  }
+
+  if (alturaEhValida && pesoEhValido){
+      tdImc.textContent = (peso / (altura * altura)).toFixed(2);
+  }
 }
